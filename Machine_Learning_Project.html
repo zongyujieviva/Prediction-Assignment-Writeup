@@ -120,7 +120,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Machine_Learning_Project.R</h1>
 <h4 class="author"><em>YZong</em></h4>
-<h4 class="date"><em>Tue Dec 26 17:09:07 2017</em></h4>
+<h4 class="date"><em>Tue Dec 26 17:18:45 2017</em></h4>
 
 </div>
 
@@ -166,9 +166,11 @@ dim(training)</code></pre>
 ##    adelmo  carlitos   charles    eurico    jeremy     pedro 
 ## 0.1983488 0.1585975 0.1802059 0.1564570 0.1733768 0.1330140</code></pre>
 <pre class="r"><code>#### Data Cleaning
+#### Remove those variables that has missing values
 training &lt;- training[, colSums(is.na(training)) == 0]
 testing &lt;- testing[, colSums(is.na(testing)) == 0] 
 
+### Remove unrelated variables
 classe &lt;- training$classe
 trainRemove &lt;- grepl(&quot;^X|timestamp|window&quot;, names(training))
 training &lt;- training[, !trainRemove]
@@ -178,6 +180,7 @@ testRemove &lt;- grepl(&quot;^X|timestamp|window&quot;, names(testing))
 testing &lt;- testing[, !testRemove]
 testing &lt;- testing[, sapply(testing, is.numeric)]
 
+### Now both training and testing data constrain to 53 variables
 dim(training)</code></pre>
 <pre><code>## [1] 19622    53</code></pre>
 <pre class="r"><code>dim(testing)</code></pre>
@@ -203,7 +206,26 @@ F1 &lt;- train(classe ~ ., method = &quot;rf&quot;, data = mytrain,trControl=con
 ## 
 ##     margin</code></pre>
 <pre class="r"><code>F2 &lt;- train(classe ~ ., method = &quot;rpart&quot;, data = mytrain)
-
+F1</code></pre>
+<pre><code>## Random Forest 
+## 
+## 13737 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 10990, 10991, 10989, 10990, 10988 
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy   Kappa    
+##    2    0.9911914  0.9888562
+##   27    0.9903909  0.9878441
+##   52    0.9847129  0.9806594
+## 
+## Accuracy was used to select the optimal model using  the largest value.
+## The final value used for the model was mtry = 2.</code></pre>
+<pre class="r"><code>### Model 1 return the accuracy = 99.16% and out-of-sample error = 0.84%
 pred1 &lt;- predict(F1,mytest)
 pred2 &lt;- predict(F2,mytest)
 confusionMatrix(pred1, mytest$classe)$overall[1]</code></pre>
