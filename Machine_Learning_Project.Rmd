@@ -216,8 +216,8 @@ F1</code></pre>
 ## Accuracy was used to select the optimal model using  the largest value.
 ## The final value used for the model was mtry = 2.</code></pre>
 <pre class="r"><code>### Model 1 return the accuracy = 99.12% and out-of-sample error = 0.88%
-<code>### Then we apply the model fit to mytest and see the accuracy.
-<code>### Model 1 still has 99%; Model 2 is still below 50%
+### Then we apply the model fit to mytest and see the accuracy.
+### Model 1 still has 99%; Model 2 is still below 50%
 pred1 &lt;- predict(F1,mytest)
 pred2 &lt;- predict(F2,mytest)
 confusionMatrix(pred1, mytest$classe)$overall[1]</code></pre>
