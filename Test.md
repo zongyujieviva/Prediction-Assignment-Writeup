@@ -23,7 +23,7 @@ summary(cars)
     ##  3rd Qu.:19.0   3rd Qu.: 56.00  
     ##  Max.   :25.0   Max.   :120.00
 
-Including Plots, hahaha
+Including Plots
 ---------------
 
 You can also embed plots, for example:
@@ -34,4 +34,4 @@ plot(pressure)
 
 ![](Test_files/figure-markdown_github/pressure-1.png)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. Oh yes!
